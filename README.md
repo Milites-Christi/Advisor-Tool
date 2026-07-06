@@ -41,6 +41,23 @@ python examples/multi_turn.py             # carrying advisor_tool_result across 
 python examples/agent_loop_with_nudge.py  # full agent loop: custom tools + nudge + usage accounting
 ```
 
+## Interactive chat
+
+`chat.py` is a terminal chat loop you leave running: type messages, the executor model
+answers, and it consults the advisor model mid-turn when the situation calls for it.
+
+```bash
+python chat.py
+# or, e.g. a cheap executor stepped up by a strong advisor:
+python chat.py --executor claude-haiku-4-5-20251001 --advisor claude-opus-4-8 --verbose
+```
+
+In-chat commands: `/reset` clears history, `/usage` prints cumulative executor vs. advisor
+token counts, `/exit` quits (or Ctrl-D / Ctrl-C). `--verbose` prints the advisor's actual
+text and per-turn usage as it happens; without it you just see `[consulting advisor...]` /
+`[advisor replied]` markers. See `python chat.py --help` for all flags (`--max-uses`,
+`--advisor-max-tokens`, `--caching-ttl`, `--system`).
+
 ## What's in this package
 
 - `advisor_tool/config.py` — the executor/advisor model compatibility matrix
