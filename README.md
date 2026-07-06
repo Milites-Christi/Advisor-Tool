@@ -41,6 +41,20 @@ python examples/multi_turn.py             # carrying advisor_tool_result across 
 python examples/agent_loop_with_nudge.py  # full agent loop: custom tools + nudge + usage accounting
 ```
 
+## Checking beta access
+
+Not sure if your key/org has the `advisor_20260301` beta enabled? Run:
+
+```bash
+python check_access.py
+```
+
+This makes one minimal live call, forcing an advisor consult via `tool_choice` so a
+successful response proves the whole round trip works (not just that the beta header was
+accepted). It prints a plain-language diagnosis — access confirmed, no access (beta not
+enabled for your org), invalid key, or a transient advisor-side error — instead of a raw
+traceback. Pass `--executor`/`--advisor` to test a different model pair.
+
 ## Interactive chat
 
 `chat.py` is a terminal chat loop you leave running: type messages, the executor model
